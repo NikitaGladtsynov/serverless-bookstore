@@ -9,6 +9,8 @@ app = Flask(__name__)
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
 def get_db_connection():
+    if not DATABASE_URL:
+        raise Exception("DATABASE_URL не задан — база недоступна")
     return psycopg2.connect(DATABASE_URL)
 
 def init_db():
